@@ -1,3 +1,4 @@
+# Import required libraries
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -5,10 +6,11 @@ from datetime import datetime
 # Initialize the Flask application
 app = Flask(__name__)
 
+# Configure the SQLAlchemy database URI to use SQLite
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///villain.db"
 db = SQLAlchemy(app)
 
-
+# Defining the Villain model
 class Villain(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
@@ -24,23 +26,32 @@ with app.app_context():
 	db.create_all()
 	db.session.commit()
 
-#### Serving Static Files
+# ------------------------------
+# Routes for serving Static HTML Files
+# ------------------------------
+
 @app.route("/")
 def villain_cards():
+  # Serves the main HTML page for viewing villains
   return app.send_static_file("villain.html")
 
 @app.route("/add")
 def add():
+  # Serves the HTML form to add a villain
   return app.send_static_file("addvillain.html")
 
 @app.route("/delete")
 def delete():
+  # Serves the HTML form to delete a villain
   return app.send_static_file("deletevillain.html")
-####
 
-#ADD CODE: add /api/villains route here
+# -----------------------------
+# API Routes
+# -----------------------------
+
 @app.route("/api/villains/", methods=["GET"])
 def get_villains():
+   """Returns a list of all villains in the databse."""
    villains=Villain.query.all()
    data = []
    for villain in villains:
@@ -55,9 +66,11 @@ def get_villains():
 
 @app.route("/api/villains/add", methods=["POST"])
 def add_villain():
+  """Adds a new villain to the database after validating input."""
   errors = []
   name = request.form.get("name")
 
+# Validate inputs
   if not name:
     errors.append("Oops! Looks like you forgot a name!")
 
@@ -73,6 +86,7 @@ def add_villain():
   if not url:
     errors.append("Oops! Looks like you forgot an image!")
   
+  # Check if the villain name already exists
   villain = Villain.query.filter_by(name=name).first()
   if villain:
     errors.append("Oops! A villain with that name already exists!")
@@ -80,6 +94,7 @@ def add_villain():
   if errors:
     return jsonify({"errors": errors})
   else:
+    #Create and commit the new villain
     new_villain = Villain(name=name,description=description, interests=interests, url=url)
     db.session.add(new_villain)
     db.session.commit()
@@ -105,6 +120,8 @@ def get_endpoints():
    }
    return jsonify(endpoints)
 
+#-------------------------
 # Run the flask server
+#-------------------------
 if __name__ == "__main__":
     app.run()
