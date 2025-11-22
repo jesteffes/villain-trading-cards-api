@@ -1,67 +1,40 @@
-# Install Python
+# 🃏 Villain Trading Cards Project - RESTful API
 
-Check to see if you already have Python installed on your system by running:
+This project contains a Flask web application that exposes a RESTful API to manage **supervillain trading cards**. The app allows users to add, view, and delete villains via HTTP requests. The core functionality is built around JSON APIs.
 
-On a Mac:
-`python3 --version`
+---
 
-On Windows:
-`python --version`
+## 📚 Table of Contents
 
-If you already have Python installed, check to be sure it’s Python 3.8 or up. (For example, 3.11 is great!) We suggest waiting on 3.12 to give any dependencies time to be updated.
+- [📂 Overview](#-overview)
+- [🦹‍♂️ Project Background](#-project-background)
+- [🚀 Check It Out](#-check-it-out)
 
-If you are using a Windows machine, it is possible that you don’t have Python installed. You’ll need to pause here for a moment and proceed to install it. See this document for more [information](https://docs.google.com/document/d/14diNu_g6uhouBscRt8zIezolANTRQA6HobKRP4Lgu5Q/copy).
+---
 
-# Setting up to run scripts to work with Python.
+## 📂 Overview
 
-The script will be run in a virtual environment. Start by creating a virtual environment. Navigate to to the project folder in the command line and run:
+This project is a backend-focused version of the [Villain Trading Cards Template](https://github.com/jesteffes/villain-trading-cards-template) project. Instead of rendering Jinja templates, this version uses a RESTful API to interact with a SQLite database.
 
-On a Mac:
-`python3 -m venv venv`
+---
 
-On Windows:
-`python -m venv venv`
+## 🦹‍♂️ Project Background
 
-<br>
-After creating the virtual environment, you need to activate it:
+This project was part of Skillcrush's "Using Python to Build Web Apps" lesson. Using the guidance and materials provided, I built a RESTful API that manages a collection of supervillain trading cards. Users can add, view, and delete villains via HTTP requests, and all data is stored in a SQLite database using Flask-SQLAlchemy. The app is built with Flask and focuses on backend functionality, using routes and HTTP methods (GET and POST) to send and receive JSON data. 
 
-On a Mac:
-`source venv/bin/activate`
+---
 
-On Windows:
-`source venv/Scripts/activate`
+## 🚀 Check It Out
 
-<br>
-Once the virtual environment is activated, the beginning of your terminal prompt should display (venv).
+You can try out the live API here:
 
-<br>
-Install the modules by running (in both a Mac and Windows):
+👉 **[Launch the Villain Trading Cards API on Replit](https://824dab8e-c267-4173-b676-29a24db74c8a-00-1677n16ab178t.spock.replit.dev)**  
 
-`pip install flask flask-sqlalchemy`
+---
 
-You'll see a venv folder has been added to the directory with all of the installed dependencies.
 
-<br>
 
-To run your code, in the command line run:
 
-Without a debugger:
-`flask run`
 
-With a debugger:
-`flask run --debug`
 
-<br>
 
-The app will run at: http://127.0.0.1:5000/
-
-<br>
-
-To stop the run, click control + C. When making changes to your Python, HTML, or JavaScript code (and not using debugger) you'll need to stop the run after each change. After restarting the server, hard refresh the page.
-
-<br>
-When finished, quit the run by clicking control + C and close the virtual environment by running:
-
-`deactivate`
-
-<br>
